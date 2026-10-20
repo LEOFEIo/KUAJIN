@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>飞云引力 · 量化与跨境智能工作台</title>
+<style>
+:root{--bg:#fbfbfd;--card:#fff;--tx:#1d1d1f;--tx2:#6e6e73;--line:#d2d2d7;--blue:#0071e3;--green:#248a3d;--red:#d70015;--glass:rgba(251,251,253,.72);--fill:#f5f5f7;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000;--card:#1c1c1e;--tx:#f5f5f7;--tx2:#98989d;--line:#38383a;--blue:#2997ff;--green:#30d158;--red:#ff453a;--glass:rgba(0,0,0,.72);--fill:#2c2c2e;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#000;--card:#1c1c1e;--tx:#f5f5f7;--tx2:#98989d;--line:#38383a;--blue:#2997ff;--green:#30d158;--red:#ff453a;--glass:rgba(0,0,0,.72);--fill:#2c2c2e;color-scheme:dark}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 60px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.47}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:rgba(22,22,23,.8);backdrop-filter:blur(20px);z-index:10}body{overflow-x:hidden}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:rgba(22,22,23,.8);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px)}
+nav div{max-width:1024px;margin:auto;display:flex;gap:2px;align-items:center;justify-content:space-between;height:44px;padding:0 16px;overflow-x:auto}
+nav b{font-weight:600;color:#f5f5f7;white-space:nowrap;font-size:15px;margin-right:12px}
+nav button{border:0;background:none;color:rgba(245,245,247,.8);font:inherit;font-size:12px;padding:6px 10px;cursor:pointer;white-space:nowrap}nav button:hover{color:#fff}
+nav button.on{color:#fff;font-weight:600}
+main{max-width:1040px;margin:auto;padding:0 16px 80px}
+.hero{margin:0 calc(50% - 50vw);background:#000 radial-gradient(ellipse 60% 55% at 50% 0%,rgba(41,151,255,.38),transparent 70%);color:#f5f5f7;text-align:center;padding:96px 16px 88px}
+.cta{display:flex;gap:22px;justify-content:center;align-items:center;margin-top:28px;flex-wrap:wrap}
+.pill{background:#0071e3;color:#fff;padding:12px 22px;border-radius:980px;font-size:17px;cursor:pointer}
+.lnk{color:#2997ff;font-size:19px;cursor:pointer}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s ease}.rv.in{opacity:1;transform:none}
+.hero h1{font-size:clamp(40px,8.5vw,96px);line-height:1.04;letter-spacing:-.03em;margin:0 0 16px;font-weight:700;background:linear-gradient(90deg,#2997ff,#bf5af2 55%,#ff6482);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:clamp(19px,2.6vw,28px);color:#a1a1a6;margin:0 auto;max-width:680px;line-height:1.28}.hero .eb{font-size:clamp(17px,2vw,21px);color:#f5f5f7;font-weight:600;margin-bottom:8px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}@media(max-width:760px){.tiles{grid-template-columns:1fr}}
+.tile{background:var(--fill);border-radius:28px;padding:56px 24px;min-height:340px;text-align:center;cursor:pointer;display:flex;flex-direction:column;justify-content:center}.tile:nth-child(1),.tile:nth-child(4){background:#000;color:#f5f5f7}.tile:nth-child(1) p,.tile:nth-child(4) p{color:#a1a1a6}.tile::after{content:"了解更多 ›";color:var(--blue);font-size:19px}
+
+.tile h3{margin:0 0 8px;font-size:clamp(28px,4vw,40px);letter-spacing:-.02em;font-weight:700}.tile p{margin:0 auto 14px;color:var(--tx2);font-size:19px;max-width:360px}
+section{padding-top:112px}#home{padding-top:0}
+h2{font-size:clamp(34px,6vw,64px);letter-spacing:-.03em;margin:0 0 8px;text-align:center;font-weight:700;line-height:1.08}
+.sub{color:var(--tx2);margin:0 auto 36px;text-align:center;font-size:clamp(17px,2.2vw,24px);max-width:680px;line-height:1.3}
+.grid{display:grid;grid-template-columns:300px 1fr;gap:16px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border-radius:20px;padding:20px}
+label{display:block;font-size:12px;color:var(--tx2);margin:12px 0 4px}
+input,select{width:100%;font:inherit;font-size:16px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--fill);color:var(--tx)}
+input:focus,select:focus{outline:2px solid var(--blue);outline-offset:-1px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{margin-top:16px;width:100%;border:0;background:var(--blue);color:#fff;font:inherit;font-weight:500;padding:11px;border-radius:980px;cursor:pointer}
+.btn:active{opacity:.8}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:14px}
+.kpi{background:var(--fill);border-radius:14px;padding:12px 14px}
+.kpi small{color:var(--tx2);font-size:12px;display:block}.kpi b{font-size:22px;font-weight:600}
+.up{color:var(--green)}.dn{color:var(--red)}
+svg{width:100%;height:auto;display:block}
+.leg{font-size:13px;color:var(--tx2);display:flex;gap:16px;margin-top:8px}
+.leg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
+.wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}td{padding:7px 0;border-bottom:1px solid var(--line)}td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.chat{height:380px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:4px}
+.m{max-width:85%;padding:10px 14px;border-radius:18px;font-size:15px;white-space:pre-wrap}
+.u{align-self:flex-end;background:var(--blue);color:#fff}
+.a{align-self:flex-start;background:var(--fill)}
+.step{font-size:12px;color:var(--tx2);display:block}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.chip{border:1px solid var(--line);background:none;color:var(--blue);padding:6px 12px;border-radius:980px;font:inherit;font-size:13px;cursor:pointer}
+.send{display:flex;gap:8px}.send .btn{width:90px;margin:0}
+footer{text-align:center;color:var(--tx2);font-size:12px;padding:20px 16px;background:var(--fill);border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<nav><div><b>飞云引力</b>
+<button class="on" data-t="home">总览</button><button data-t="bt">策略回测</button><button data-t="pf">跨境利润</button><button data-t="inv">智能补货</button><button data-t="ops">SKU 运营</button><button data-t="ag">Agent</button></div></nav>
+<main>
+<section id="home" class="on">
+<div class="hero"><p class="eb">飞云引力</p><h1>量化决策，<br>一个工作台搞定。</h1><p>策略回测、跨境电商利润测算、库存补货，全部由 Agent 调度，用一句话完成。</p><div class="cta"><a class="pill" data-go="bt">开始回测</a><a class="lnk" data-go="ag">与 Agent 对话 ›</a></div></div>
+<div class="tiles">
+<div class="tile" data-go="bt"><h3>策略回测</h3><p>均线、RSI、布林带，夏普与回撤即时计算。</p></div>
+<div class="tile" data-go="pf"><h3>跨境利润</h3><p>汇率、头程、佣金、广告、关税、退货全链路。</p></div>
+<div class="tile" data-go="inv"><h3>智能补货</h3><p>安全库存、再订货点、经济订货量。</p></div>
+<div class="tile" data-go="ag"><h3>Agent</h3><p>自然语言调用以上全部工具。</p></div></div></section>
+
+<section id="bt"><h2>策略回测</h2><p class="sub">基于可复现的随机种子行情（几何布朗运动），含手续费，T+1 执行。</p>
+<div class="grid"><div class="card">
+<label>策略</label><select id="bs"><option value="ma">双均线交叉</option><option value="rsi">RSI 均值回归</option><option value="boll">布林带回归</option></select>
+<div class="row"><div><label>参数 A（快线/周期）</label><input id="pa" type="number" value="10"></div><div><label>参数 B（慢线/倍数）</label><input id="pb" type="number" value="30"></div></div>
+<div class="row"><div><label>天数</label><input id="bn" type="number" value="500"></div><div><label>随机种子</label><input id="bseed" type="number" value="7"></div></div>
+<div class="row"><div><label>年化漂移 %</label><input id="bd" type="number" value="8"></div><div><label>年化波动 %</label><input id="bv" type="number" value="25"></div></div>
+<label>单边手续费 %</label><input id="bf" type="number" step="0.01" value="0.05">
+<button class="btn" id="runbt">运行回测</button></div>
+<div class="card"><div class="kpis" id="bk"></div><svg id="bc" viewBox="0 0 800 280"></svg><div class="leg"><span><i style="background:var(--blue)"></i>策略净值</span><span><i style="background:var(--tx2)"></i>买入持有</span></div></div></div></section>
+
+<section id="pf"><h2>跨境利润测算</h2><p class="sub">以美元售价为基准，成本与运费以人民币输入。</p>
+<div class="grid"><div class="card">
+<div class="row"><div><label>售价 USD</label><input id="p_price" type="number" step="0.01" value="29.99"></div><div><label>汇率 CNY/USD</label><input id="p_fx" type="number" step="0.01" value="7.2"></div></div>
+<div class="row"><div><label>采购成本 ¥</label><input id="p_cost" type="number" value="45"></div><div><label>头程运费 ¥</label><input id="p_ship" type="number" value="12"></div></div>
+<div class="row"><div><label>平台佣金 %</label><input id="p_comm" type="number" value="15"></div><div><label>FBA 配送费 USD</label><input id="p_fba" type="number" step="0.01" value="3.8"></div></div>
+<div class="row"><div><label>广告占比 ACOS %</label><input id="p_ad" type="number" value="12"></div><div><label>关税 %（按货值）</label><input id="p_tax" type="number" value="5"></div></div>
+<div class="row"><div><label>退货率 %</label><input id="p_ret" type="number" value="4"></div><div><label>目标净利率 %</label><input id="p_tm" type="number" value="20"></div></div>
+<button class="btn" id="runpf">计算</button></div>
+<div class="card"><div class="kpis" id="pk"></div><div class="wrap"><table id="pt"></table></div>
+<p class="sub" style="margin-top:12px;font-size:12px">退货假设：退货件损失配送费、头程，并有 30% 货值无法再售。</p></div></div></section>
+
+<section id="inv"><h2>智能补货</h2><p class="sub">按服务水平计算安全库存、再订货点与经济订货量。</p>
+<div class="grid"><div class="card">
+<div class="row"><div><label>日均销量</label><input id="i_d" type="number" value="30"></div><div><label>日销量标准差</label><input id="i_s" type="number" value="8"></div></div>
+<div class="row"><div><label>补货周期（天）</label><input id="i_l" type="number" value="35"></div><div><label>服务水平</label><select id="i_z"><option value="1.28">90%</option><option value="1.645" selected>95%</option><option value="2.33">99%</option></select></div></div>
+<div class="row"><div><label>单次订货成本 ¥</label><input id="i_o" type="number" value="300"></div><div><label>单件年持有成本 ¥</label><input id="i_h" type="number" value="6"></div></div>
+<label>当前库存（含在途）</label><input id="i_c" type="number" value="900">
+<button class="btn" id="runinv">计算</button></div>
+<div class="card"><div class="kpis" id="ik"></div><div class="wrap"><table id="it"></table></div></div></div></section>
+
+<section id="ops"><h2>SKU 运营中枢</h2><p class="sub">导入你的真实商品数据，自动算出每个 SKU 的利润、补货与积压状态。数据保存在你的浏览器里。</p>
+<div class="card"><div class="kpis" id="sk"></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(108px,1fr));gap:8px">
+<input id="a_sku" placeholder="SKU 编号"><input id="a_name" placeholder="商品名称"><input id="a_price" type="number" placeholder="售价 USD"><input id="a_cost" type="number" placeholder="采购成本 ¥"><input id="a_ship" type="number" placeholder="头程 ¥"><input id="a_fba" type="number" placeholder="FBA USD"><input id="a_comm" type="number" placeholder="佣金 %"><input id="a_acos" type="number" placeholder="ACOS %"><input id="a_daily" type="number" placeholder="日销量"><input id="a_stock" type="number" placeholder="库存"><input id="a_lead" type="number" placeholder="补货周期 天"><input id="s_fx" type="number" step="0.01" value="7.2" title="汇率" placeholder="汇率"></div>
+<div class="chips"><button class="chip" id="sadd">添加 SKU</button><button class="chip" id="simp">导入 CSV</button><button class="chip" id="sexp">导出 CSV</button><button class="chip" id="sdemo">载入示例</button><button class="chip" id="sclr">清空</button><input id="csvf" type="file" accept=".csv,text/csv" style="display:none"></div>
+<div class="wrap"><table id="st" style="min-width:780px"></table></div>
+<p class="sub" style="margin:12px 0 0;font-size:12px;text-align:left">CSV 表头：sku,name,price,cost,ship,fba,comm,acos,daily,stock,lead。假设：关税 5%，退货率 4%，需求波动为均值 30%，服务水平 95%；积压 = 可售天数超过 120 天。右下角汇率框修改后自动重算。</p></div></section>
+<section id="ag"><h2>Agent</h2><p class="sub">用自然语言调用回测、利润、补货工具，Agent 会解析参数、执行并回填到面板。</p>
+<div class="card"><div class="chat" id="chat"></div>
+<div class="chips"><button class="chip">回测 RSI 14 3 天数 800 种子 5</button><button class="chip">回测 均线 5 20</button><button class="chip">利润 售价 39.9 成本 60 运费 15 广告 18</button><button class="chip">补货 日销 50 周期 40 当前库存 1200</button></div>
+<div class="send"><input id="ain" placeholder="例如：回测 均线 10 30"><button class="btn" id="asend">发送</button></div></div></section>
+</main>
+<footer>仅用于研究与教学，模拟数据不构成投资或经营建议。</footer>
+<script>
+const $=id=>document.getElementById(id),v=id=>parseFloat($(id).value)||0;
+function show(t){document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));$(t).scrollIntoView({behavior:'smooth'})}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>show(b.dataset.t));
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>show(b.dataset.go));
+const pct=(x,d=2)=>(x*100).toFixed(d)+'%',cls=x=>x>=0?'up':'dn';
+const kp=(a)=>a.map(([l,x,c])=>`<div class="kpi"><small>${l}</small><b class="${c||''}">${x}</b></div>`).join('');
+
+/* ---------- 回测引擎 ---------- */
+function rng(s){return()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function prices(n,seed,mu,sg){const r=rng(seed),p=[100],dt=1/252;
+ const nm=()=>{let u=0,w=0;while(!u)u=r();while(!w)w=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*w)};
+ for(let i=1;i<n;i++)p.push(p[i-1]*Math.exp((mu-sg*sg/2)*dt+sg*Math.sqrt(dt)*nm()));return p}
+const sma=(p,i,n)=>{if(i<n-1)return null;let s=0;for(let k=i-n+1;k<=i;k++)s+=p[k];return s/n};
+function signals(type,p,a,b){const pos=Array(p.length).fill(0);let h=0;
+ for(let i=0;i<p.length;i++){
+  if(type==='ma'){const f=sma(p,i,a),s=sma(p,i,b);if(f!=null&&s!=null)h=f>s?1:0}
+  else if(type==='rsi'){if(i>a){let g=0,l=0;for(let k=i-a+1;k<=i;k++){const d=p[k]-p[k-1];d>0?g+=d:l-=d}const rs=l===0?100:g/l,R=100-100/(1+rs);if(R<30)h=1;else if(R>55)h=0}}
+  else{const m=sma(p,i,a);if(m!=null){let s=0;for(let k=i-a+1;k<=i;k++)s+=(p[k]-m)**2;const sd=Math.sqrt(s/a);if(p[i]<m-b*sd)h=1;else if(p[i]>m)h=0}}
+  pos[i]=h}return pos}
+function backtest(o){const p=prices(o.n,o.seed,o.mu,o.sg),pos=signals(o.type,p,o.a,o.b),fee=o.fee;
+ const eq=[1],bh=[1],rets=[];let trades=0,wins=0,ent=null;
+ for(let i=1;i<p.length;i++){const hold=pos[i-1],r=hold*(p[i]/p[i-1]-1);let c=0;
+  if(i>1&&pos[i-1]!==pos[i-2]){c=fee;trades++;if(pos[i-1]===1)ent=eq[i-1];else if(ent!=null&&eq[i-1]>ent)wins++}
+  const rr=r-c;rets.push(rr);eq.push(eq[i-1]*(1+rr));bh.push(p[i]/p[0])}
+ const m=rets.reduce((s,x)=>s+x,0)/rets.length,sd=Math.sqrt(rets.reduce((s,x)=>s+(x-m)**2,0)/rets.length)||1e-9;
+ let pk=1,dd=0;eq.forEach(x=>{pk=Math.max(pk,x);dd=Math.min(dd,x/pk-1)});
+ const tot=eq.at(-1)-1,ann=Math.pow(eq.at(-1),252/rets.length)-1,closed=Math.max(1,Math.floor(trades/2));
+ return{eq,bh,tot,ann,sharpe:m/sd*Math.sqrt(252),dd,trades,win:wins/closed,bhTot:bh.at(-1)-1}}
+function draw(eq,bh){const W=800,H=280,all=eq.concat(bh),mn=Math.min(...all),mx=Math.max(...all),
+ X=i=>i/(eq.length-1)*W,Y=x=>H-8-(x-mn)/(mx-mn||1)*(H-16),
+ pl=(a,c,w)=>`<polyline fill="none" stroke="${c}" stroke-width="${w}" stroke-linejoin="round" points="${a.map((x,i)=>X(i).toFixed(1)+','+Y(x).toFixed(1)).join(' ')}"/>`;
+ let g='';for(let k=0;k<=4;k++){const y=8+k*(H-16)/4;g+=`<line x1="0" x2="${W}" y1="${y}" y2="${y}" stroke="var(--line)" stroke-width=".6"/><text x="4" y="${y-3}" font-size="11" fill="var(--tx2)">${(mx-(mx-mn)*k/4).toFixed(2)}</text>`}
+ $('bc').innerHTML=g+pl(bh,'var(--tx2)',1.5)+pl(eq,'var(--blue)',2.4)}
+function runBT(){const r=backtest({type:$('bs').value,a:v('pa'),b:v('pb'),n:Math.max(60,v('bn')),seed:v('bseed'),mu:v('bd')/100,sg:v('bv')/100,fee:v('bf')/100});
+ $('bk').innerHTML=kp([['策略总收益',pct(r.tot),cls(r.tot)],['年化收益',pct(r.ann),cls(r.ann)],['夏普比率',r.sharpe.toFixed(2),cls(r.sharpe)],['最大回撤',pct(r.dd),'dn'],['交易次数',r.trades],['胜率',pct(r.win,0)],['买入持有',pct(r.bhTot),cls(r.bhTot)]]);
+ draw(r.eq,r.bh);return r}
+
+/* ---------- 跨境利润 ---------- */
+function calcPF(){const price=v('p_price'),fx=v('p_fx')||1,cost=v('p_cost')/fx,ship=v('p_ship')/fx,cm=v('p_comm')/100,fba=v('p_fba'),ad=v('p_ad')/100,tax=v('p_tax')/100,rt=v('p_ret')/100,tm=v('p_tm')/100;
+ const commission=price*cm,adc=price*ad,duty=cost*tax,retLoss=rt*(fba+ship+cost*.3);
+ const fixed=cost+ship+fba+duty+retLoss,net=price-commission-adc-fixed,mg=net/price;
+ const be=fixed/(1-cm-ad),sug=fixed/(1-cm-ad-tm),beAcos=(price*(1-cm)-fixed)/price;
+ $('pk').innerHTML=kp([['单件净利润','$'+net.toFixed(2),cls(net)],['净利率',pct(mg),cls(mg)],['投资回报率 ROI',pct(net/(cost+ship+duty)),cls(net)],['保本售价','$'+be.toFixed(2)],['保本 ACOS',pct(Math.max(0,beAcos),1)],['达标建议售价','$'+sug.toFixed(2)]]);
+ const rows=[['售价',price],['采购成本',-cost],['头程运费',-ship],['关税',-duty],['平台佣金',-commission],['FBA 配送费',-fba],['广告费',-adc],['退货损失',-retLoss],['净利润',net]];
+ $('pt').innerHTML=rows.map(([n,x])=>`<tr><td>${n}</td><td class="${n==='净利润'?cls(x):''}">${x<0?'-':''}$${Math.abs(x).toFixed(2)}</td></tr>`).join('');return{net,mg,sug,be}}
+
+/* ---------- 补货 ---------- */
+function calcInv(){const d=v('i_d'),s=v('i_s'),L=v('i_l'),z=parseFloat($('i_z').value),o=v('i_o'),h=v('i_h')||1,cur=v('i_c');
+ const ss=z*s*Math.sqrt(L),rop=d*L+ss,eoq=Math.sqrt(2*d*365*o/h),need=Math.max(0,rop-cur),cover=d?cur/d:0;
+ $('ik').innerHTML=kp([['安全库存',Math.ceil(ss)],['再订货点',Math.ceil(rop)],['经济订货量 EOQ',Math.ceil(eoq)],['可售天数',cover.toFixed(0)+' 天',cover<L?'dn':'up']]);
+ const act=cur<=rop?`建议立即补货，至少 ${Math.ceil(Math.max(eoq,need))} 件`:`暂不需补货，约 ${Math.floor((cur-rop)/(d||1))} 天后触发`;
+ $('it').innerHTML=[['需求周期内用量',Math.round(d*L)],['年订货次数',(d*365/eoq).toFixed(1)],['当前库存',cur],['建议',act]].map(([n,x])=>`<tr><td>${n}</td><td>${x}</td></tr>`).join('');return{ss,rop,eoq,act}}
+
+/* ---------- Agent ---------- */
+const chat=$('chat');
+function say(t,c){const d=document.createElement('div');d.className='m '+c;d.innerHTML=t;chat.appendChild(d);chat.scrollTop=chat.scrollHeight}
+const num=(t,k)=>{const m=t.match(new RegExp(k+'\\D{0,3}(\\d+(?:\\.\\d+)?)'));return m?parseFloat(m[1]):null};
+function setv(id,x){if(x!=null)$(id).value=x}
+function agent(t){say(t.replace(/</g,'&lt;'),'u');const q=t.toLowerCase();
+ if(/回测|backtest/.test(q)){const type=/rsi/.test(q)?'rsi':/布林|boll/.test(q)?'boll':'ma';$('bs').value=type;
+  const ns=(q.match(/\d+(?:\.\d+)?/g)||[]).map(Number);const nums=q.replace(/(天数|种子|漂移|波动)\D{0,3}\d+(\.\d+)?/g,'').match(/\d+(?:\.\d+)?/g)||[];
+  if(nums[0])setv('pa',nums[0]);if(nums[1])setv('pb',nums[1]);setv('bn',num(q,'天数'));setv('bseed',num(q,'种子'));setv('bd',num(q,'漂移'));setv('bv',num(q,'波动'));
+  const r=runBT();const nm={ma:'双均线',rsi:'RSI',boll:'布林带'}[type];
+  say(`<span class="step">① 识别意图：策略回测　② 选择策略：${nm}（${$('pa').value}, ${$('pb').value}）　③ 调用回测引擎</span>策略总收益 ${pct(r.tot)}，年化 ${pct(r.ann)}，夏普 ${r.sharpe.toFixed(2)}，最大回撤 ${pct(r.dd)}，共 ${r.trades} 次交易。同期买入持有 ${pct(r.bhTot)}。\n${r.tot>r.bhTot?'策略跑赢基准，但请换种子验证稳健性，避免过拟合。':'策略未跑赢基准，可尝试调整参数或换策略。'}`,'a');setTimeout(()=>show('bt'),900)}
+ else if(/利润|定价|profit/.test(q)){setv('p_price',num(q,'售价'));setv('p_cost',num(q,'成本'));setv('p_ship',num(q,'运费'));setv('p_ad',num(q,'广告'));setv('p_comm',num(q,'佣金'));setv('p_fx',num(q,'汇率'));setv('p_ret',num(q,'退货'));
+  const r=calcPF();say(`<span class="step">① 识别意图：利润测算　② 解析成本结构　③ 调用利润模型</span>单件净利润 $${r.net.toFixed(2)}，净利率 ${pct(r.mg)}。保本售价 $${r.be.toFixed(2)}，要达到 ${$('p_tm').value}% 净利率建议定价 $${r.sug.toFixed(2)}。\n${r.mg<.1?'利润偏薄，建议压低广告占比或优化头程。':'利润结构健康。'}`,'a');setTimeout(()=>show('pf'),900)}
+ else if(/sku|选品|商品/.test(q)){const rs=skuRows();if(!rs.length)say('<span class="step">① 识别意图：SKU 分析　② 读取 SKU 数据</span>还没有 SKU 数据，请先到「SKU 运营」导入 CSV 或载入示例。','a');else{const top=[...rs].sort((a,b)=>b.score-a.score)[0],tp=rs.reduce((s,r)=>s+r.profit30,0),rep=rs.filter(r=>r.st==='需补货').map(r=>r.sku),ov=rs.filter(r=>r.st==='积压').map(r=>r.sku),low=rs.filter(r=>r.mg<.1).map(r=>r.sku);say(`<span class="step">① 识别意图：SKU 分析　② 读取 ${rs.length} 个 SKU　③ 计算利润与库存状态</span>月预估净利润 $${Math.round(tp).toLocaleString()}。评分最高：${top.sku} ${top.name}（${top.score} 分，净利率 ${pct(top.mg,1)}）。\n需补货：${rep.join('、')||'无'}\n积压：${ov.join('、')||'无'}（建议降价清仓或暂停广告）\n净利率低于 10%：${low.join('、')||'无'}`,'a')}setTimeout(()=>show('ops'),900)}
+ else if(/补货|库存|inventory/.test(q)){setv('i_d',num(q,'日销'));setv('i_l',num(q,'周期'));setv('i_c',num(q,'当前库存'));setv('i_s',num(q,'标准差'));
+  const r=calcInv();say(`<span class="step">① 识别意图：库存补货　② 调用安全库存与 EOQ 模型</span>安全库存 ${Math.ceil(r.ss)}，再订货点 ${Math.ceil(r.rop)}，EOQ ${Math.ceil(r.eoq)}。${r.act}。`,'a');setTimeout(()=>show('inv'),900)}
+ else askAI(t)}
+function go(){const t=$('ain').value.trim();if(!t)return;$('ain').value='';agent(t)}
+$('asend').onclick=go;$('ain').onkeydown=e=>{if(e.key==='Enter')go()};
+document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>agent(c.textContent));
+/* ---------- SKU 运营 ---------- */
+const K=['sku','name','price','cost','ship','fba','comm','acos','daily','stock','lead'],esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const DEMO=[['HD-001','便携挂脖风扇',24.99,38,9,3.2,15,14,42,620,35],['HD-002','宠物自动喂食器',49.9,95,22,5.4,15,18,18,150,40],['HD-003','瑜伽垫 6mm',29.99,32,14,4.1,15,10,25,4200,30],['HD-004','车载手机支架',15.99,12,3,2.6,15,22,60,2400,28]].map(a=>Object.fromEntries(K.map((k,i)=>[k,a[i]])));
+let skus=[];try{skus=JSON.parse(localStorage.getItem('fyyl_skus')||'[]')}catch(e){}
+const persist=()=>{try{localStorage.setItem('fyyl_skus',JSON.stringify(skus))}catch(e){}};
+const unit=(r,fx)=>{const c=r.cost/fx,s=r.ship/fx,fixed=c+s+r.fba+c*.05+.04*(r.fba+s+c*.3),net=r.price*(1-r.comm/100-r.acos/100)-fixed;return{net,mg:r.price?net/r.price:0}};
+function skuRows(){const fx=v('s_fx')||7.2;return skus.map(r=>{const u=unit(r,fx),cover=r.daily?r.stock/r.daily:999,rop=r.daily*r.lead+1.645*.3*r.daily*Math.sqrt(r.lead),st=r.stock<=rop?'需补货':cover>120?'积压':'健康';
+ return{...r,...u,cover,rop,st,profit30:u.net*r.daily*30,score:Math.round(Math.min(50,Math.max(0,u.mg*200))+Math.min(30,r.daily)+(st==='健康'?20:st==='需补货'?10:0))}})}
+function renderSku(){const rs=skuRows(),tp=rs.reduce((s,r)=>s+r.profit30,0),C={需补货:'var(--red)',积压:'#ff9f0a',健康:'var(--green)'};
+ $('sk').innerHTML=kp([['SKU 数',rs.length],['月预估净利润','$'+Math.round(tp).toLocaleString(),cls(tp)],['库存货值','¥'+Math.round(rs.reduce((s,r)=>s+r.cost*r.stock,0)).toLocaleString()],['需补货',rs.filter(r=>r.st==='需补货').length,'dn'],['积压',rs.filter(r=>r.st==='积压').length]]);
+ $('st').innerHTML='<tr>'+['SKU','名称','售价$','单件利润$','净利率','日销','可售天数','月利润$','状态','评分',''].map(h=>`<td style="color:var(--tx2);font-size:12px">${h}</td>`).join('')+'</tr>'+(rs.map((r,i)=>`<tr><td>${esc(r.sku)}</td><td>${esc(r.name)}</td><td>${r.price}</td><td class="${cls(r.net)}">${r.net.toFixed(2)}</td><td>${pct(r.mg,1)}</td><td>${r.daily}</td><td>${r.cover.toFixed(0)}</td><td>${Math.round(r.profit30)}</td><td style="color:${C[r.st]}">${r.st}</td><td>${r.score}</td><td><button class="chip" onclick="delSku(${i})">删</button></td></tr>`).join('')||'<tr><td>暂无数据，请添加、导入 CSV 或载入示例</td></tr>')}
+function delSku(i){skus.splice(i,1);persist();renderSku()}
+$('sadd').onclick=()=>{if(!$('a_sku').value.trim())return;const r={};K.forEach(k=>{const x=$('a_'+k).value;r[k]=k==='sku'||k==='name'?x:parseFloat(x)||0;if(k!=='sku'&&k!=='name')$('a_'+k).value=''});$('a_sku').value='';$('a_name').value='';skus.push(r);persist();renderSku()};
+$('sdemo').onclick=()=>{skus=DEMO.map(x=>({...x}));persist();renderSku()};
+$('sclr').onclick=()=>{skus=[];persist();renderSku()};
+$('s_fx').oninput=renderSku;
+$('simp').onclick=()=>$('csvf').click();
+$('csvf').onchange=e=>{const f=e.target.files[0];if(!f)return;const fr=new FileReader();fr.onload=()=>{const L=String(fr.result).replace(/^\uFEFF/,'').split(/\r?\n/).filter(x=>x.trim()),h=L.shift().split(',').map(x=>x.trim().toLowerCase());let n=0;L.forEach(l=>{const c=l.split(','),r={};K.forEach(k=>{const j=h.indexOf(k),x=j<0?'':(c[j]||'').trim();r[k]=k==='sku'||k==='name'?x:parseFloat(x)||0});if(r.sku){skus.push(r);n++}});persist();renderSku();say('已导入 '+n+' 个 SKU。','a')};fr.readAsText(f);e.target.value=''};
+$('sexp').onclick=async()=>{const csv=K.join(',')+'\n'+skus.map(r=>K.map(k=>String(r[k]).replace(/,/g,' ')).join(',')).join('\n');try{const d=window.claude&&await claude.use('downloads');if(d)await d.save({filename:'feiyun-skus.csv',data:'\uFEFF'+csv});else say('当前环境不支持导出。','a')}catch(e){}};
+const HELP='我可以调用这些工具：\n· 回测 均线 10 30 / 回测 RSI 14 3 天数 800\n· 利润 售价 39.9 成本 60 运费 15 广告 18\n· 补货 日销 50 周期 40 当前库存 1200\n· SKU 分析（读取你在「SKU 运营」里的数据）';
+async function askAI(t){let s=null;try{s=window.claude&&await claude.use('sample')}catch(e){}
+ if(!s){say(HELP,'a');return}
+ const el=document.createElement('div');el.className='m a';el.textContent='思考中…';chat.appendChild(el);chat.scrollTop=1e9;
+ const num={type:'number'};
+ try{const r=await s([{role:'user',content:'你是「飞云引力」的跨境电商与量化 Agent，用中文简洁回答并给出可执行建议，需要数据时调用工具。\n问题：'+t}],{cache:false,onText:({text})=>{el.textContent=text},tools:[
+ {name:'list_skus',description:'列出用户全部 SKU 的售价、单件净利润、净利率、日销、可售天数、月利润、状态（需补货/积压/健康）、评分',inputSchema:{type:'object',properties:{}},execute:()=>skuRows().map(r=>({sku:r.sku,name:r.name,price:r.price,net:+r.net.toFixed(2),margin:+r.mg.toFixed(3),daily:r.daily,coverDays:Math.round(r.cover),profit30:Math.round(r.profit30),status:r.st,score:r.score}))},
+ {name:'calc_profit',description:'计算单件跨境电商净利润',inputSchema:{type:'object',properties:{price:num,cost_cny:num,ship_cny:num,fba_usd:num,commission_pct:num,acos_pct:num,fx:num},required:['price','cost_cny']},execute:i=>{const u=unit({price:i.price,cost:i.cost_cny,ship:i.ship_cny||0,fba:i.fba_usd||0,comm:i.commission_pct??15,acos:i.acos_pct??12},i.fx||7.2);return{net_usd:+u.net.toFixed(2),margin:+u.mg.toFixed(3)}}},
+ {name:'run_backtest',description:'在模拟行情上回测策略 ma(双均线)/rsi/boll',inputSchema:{type:'object',properties:{type:{type:'string'},a:num,b:num,days:num,seed:num},required:['type']},execute:i=>{const r=backtest({type:i.type,a:i.a||10,b:i.b||30,n:i.days||500,seed:i.seed||7,mu:.08,sg:.25,fee:.0005});return{total:+r.tot.toFixed(3),annual:+r.ann.toFixed(3),sharpe:+r.sharpe.toFixed(2),maxDrawdown:+r.dd.toFixed(3),trades:r.trades,buyHold:+r.bhTot.toFixed(3)}}}]});
+  el.textContent=r.text}catch(e){el.textContent=e&&e.code==='not_granted'?'需要授权后才能使用 AI 对话。':HELP}}
+renderSku();
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08});
+document.querySelectorAll('.hero>*,.tile,section h2,section .sub,section>.card,section .grid>.card').forEach(e=>{e.classList.add('rv');io.observe(e)});
+$('runbt').onclick=runBT;$('runpf').onclick=calcPF;$('runinv').onclick=calcInv;
+runBT();calcPF();calcInv();
+say('你好，我是飞云引力 Agent。试试点击下方示例，或直接输入指令。','a');
+</script>
+</body>
+</html>
